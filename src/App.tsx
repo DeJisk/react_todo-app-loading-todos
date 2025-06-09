@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 /* eslint-disable jsx-a11y/control-has-associated-label */
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { UserWarning } from './UserWarning';
 import { getTodos, USER_ID } from './api/todos';
 import { Todo } from './types/Todo';
@@ -47,6 +47,11 @@ export const App: React.FC = () => {
     }
   };
 
+  const countActiveItems = () => {
+    return todos.filter(todo => !todo.completed).length;
+    // console.log(quantityActiveItems);
+  };
+
   if (!USER_ID) {
     return <UserWarning />;
   }
@@ -85,6 +90,7 @@ export const App: React.FC = () => {
         {/* Hide the footer if there are no todos */}
         {todos.length > 0 && (
           <Footer
+            quantityActiveItems={countActiveItems()}
             statusFilter={statusFilter}
             onStatusFilter={setStatusFilter}
           />

@@ -1,15 +1,20 @@
 import React from 'react';
 
 type Props = {
+  quantityActiveItems: number;
   statusFilter: string;
   onStatusFilter: (status: string) => void;
 };
 
-export const Footer: React.FC<Props> = ({ statusFilter, onStatusFilter }) => {
+export const Footer: React.FC<Props> = ({
+  quantityActiveItems,
+  statusFilter,
+  onStatusFilter,
+}) => {
   return (
     <footer className="todoapp__footer" data-cy="Footer">
       <span className="todo-count" data-cy="TodosCounter">
-        3 items left
+        {quantityActiveItems} items left
       </span>
 
       {/* Active link should have the 'selected' class */}
